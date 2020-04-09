@@ -1,14 +1,14 @@
-ITERS=600;                                                                              %Number of last iteration to find the folder
-SimTrial = (12); % z: ["Berlin_"SimTrial"]; 
+ITERS=300;                                                                              %Number of last iteration to find the folder
+SimTrial = (15); % z: ["Berlin_"SimTrial"]; 
 SimType = (3:1:3);  % T: 1 = Heterogeneus --- 2 = Radial --- 3 = CoAxial
 SimRun = (1:1:4);   % y                                                                  %Simulations name to find the folder
 DayHours = 30;                                                                         %Simulation Time
 DaySeconds = DayHours*3600;
 
 %IFs (Income Factors)
-IF = [0.5 2 3 4; 0 0 0 0];
-IF = IF';
-ctrl = [1 2 3 4];   %Number of IF sectors
+VOT = [0.5 2 3 4; 0 0 0 0];
+VOT = VOT';
+ctrl = [1 2 3 4];   %Number of VOT sectors
 
 %% matfile to load
 load ('/Users/giulio.giorgione/Documents/MATLAB/SimEvaluator/toLoad/lineIDs10pctXYIDdouble.mat');
@@ -86,11 +86,13 @@ for z=SimTrial
         run('NReservXVOT.m');
         run('revenueCalculatorPlot.m');
         run('bookingXVOTplot.m');
+        run('AnalisysXVOT.m')
         
         if y==1
             continue
         end
         run('StationsBookingPlot.m');
+        run('Spider_Plot.m');
 
         
         copyfile ('/Users/giulio.giorgione/Documents/MATLAB/SimEvaluator', sprintf('/Users/giulio.giorgione/Documents/MATLAB/Berlin_%i/%i/%i/',z,T));

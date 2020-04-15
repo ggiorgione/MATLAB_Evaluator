@@ -37,9 +37,9 @@ SRS4 = SRS;
 % 
 % bar(NRXVOT1_VOT_sum(:,1),'g')
 % %ylim([0 30]);
-% xlabel('IF [€]');
+% xlabel('VOT [€]');
 % ylabel('# Bookings');
-% title('Number of Bookings per IF');
+% title('Number of Bookings per VOT');
 % xticklabels({'0.5','2','3','4'});
 % filename = sprintf('Bookings per IF_1.png');
 % saveas(gca,filename);
@@ -73,9 +73,9 @@ NRXVOT2_VOT_sum = [f NRXVOT2_VOTunique];
 
 bar(NRXVOT2_VOT_sum(:,1),'r')
 %ylim([0 30]);
-xlabel('IF [€]');
+xlabel('VOT [€]');
 ylabel('# Bookings');
-title('Number of Bookings per IF');
+title('Number of Bookings per VOT');
 xticklabels({'0.5','2','3','4'});
 filename = sprintf('Bookings per IF_2.png');
 saveas(gca,filename);
@@ -109,9 +109,9 @@ NRXVOT3_VOT_sum = [f NRXVOT3_VOTunique];
 
 bar(NRXVOT3_VOT_sum(:,1),'b')
 %ylim([0 30]);
-xlabel('IF [€]');
+xlabel('VOT [€]');
 ylabel('# Bookings');
-title('Number of Bookings per IF');
+title('Number of Bookings per VOT');
 xticklabels({'0.5','2','3','4'});
 filename = sprintf('Bookings per IF_3.png');
 saveas(gca,filename);
@@ -147,9 +147,9 @@ NRXVOT4_VOT_sum = [f NRXVOT4_VOTunique];
 
 bar(NRXVOT4_VOT_sum(:,1),'m')
 %ylim([0 30]);
-xlabel('IF [€]');
+xlabel('VOT [€]');
 ylabel('# Bookings');
-title('Number of Bookings per IF');
+title('Number of Bookings per VOT');
 xticklabels({'0.5','2','3','4'});
 filename = sprintf('Bookings per IF_4.png');
 saveas(gca,filename);

@@ -10,8 +10,8 @@ if T == 2
     xlabel('Station ID');
     ylabel('# Bookings');
     title('Number of Bookings per Station - FP');
-    ylim([0 20]);
-    xlim([0 18]);
+    ylim([0 7]);
+    xlim([0 inf]);
     set(gca,'XTickLabel',num2str(StationsIDentifier(:,1))),set(gca,'XTick',1:numel(StationsIDentifier(:,1)))
     filename = sprintf('StationsBookingCountsPlot2.png');
     saveas(gca,filename);
@@ -27,8 +27,8 @@ if T == 2
     xlabel('Station ID');
     ylabel('# Bookings');
     title('Number of Bookings per Station - ABDP');
-    ylim([0 20]);
-    xlim([0 18]);
+    ylim([0 7]);
+    xlim([0 inf]);
     set(gca,'XTickLabel',num2str(StationsIDentifier(:,1))),set(gca,'XTick',1:numel(StationsIDentifier(:,1)))
     filename = sprintf('StationsBookingCountsPlot3.png');
     saveas(gca,filename);
@@ -59,8 +59,8 @@ if T == 2
     xlabel('Station ID');
     ylabel('# Bookings');
     title('Number of Bookings per Station - TBDP');
-    ylim([0 20]);
-    xlim([0 18]);
+    ylim([0 7]);
+    xlim([0 inf]);
     set(gca,'XTickLabel',num2str(StationsIDentifier(:,1))),set(gca,'XTick',1:numel(StationsIDentifier(:,1)))
     filename = sprintf('StationsBookingCountsPlot4.png');
     saveas(gca,filename);
@@ -95,8 +95,8 @@ if T == 3
         xlabel('Station ID');
         ylabel('# Bookings');
         title('Number of Bookings per Station - FP');
-        ylim([0 20]);
-        xlim([0 18]);
+        ylim([0 inf]);
+        xlim([0 inf]);
         set(gca,'XTickLabel',num2str(StationsIDentifier(:,1))),set(gca,'XTick',1:numel(StationsIDentifier(:,1)))
         filename = sprintf('StationsBookingCountsPlot2.png');
         saveas(gca,filename);
@@ -114,8 +114,8 @@ if T == 3
         xlabel('Station ID');
         ylabel('# Bookings');
         title('Number of Bookings per Station - ABDP');
-        ylim([0 20]);
-        xlim([0 18]);
+        ylim([0 inf]);
+        xlim([0 inf]);
         set(gca,'XTickLabel',num2str(StationsIDentifier(:,1))),set(gca,'XTick',1:numel(StationsIDentifier(:,1)))
         filename = sprintf('StationsBookingCountsPlot3.png');
         saveas(gca,filename);
@@ -147,8 +147,8 @@ if T == 3
     xlabel('Station ID');
     ylabel('# Bookings');
     title('Number of Bookings per Station - TBDP');
-    ylim([0 20]);
-    xlim([0 18]);
+    ylim([0 inf]);
+    xlim([0 inf]);
     set(gca,'XTickLabel',num2str(StationsIDentifier(:,1))),set(gca,'XTick',1:numel(StationsIDentifier(:,1)))
     filename = sprintf('StationsBookingCountsPlot4.png');
     saveas(gca,filename);

@@ -42,9 +42,10 @@ plot(ResNumb2(:,2),ResNumb2(:,1),'r');
 % maxReservations = max(ResNumb2,ResNumb1);
 % maxReservations = maxReservations(:,1);
 % ylim([0 max(maxReservations)]);
-legend('Reservation FP','Reservation FP+IF','Location','northwest');
+legend('Reservation FP','Reservation FP+VOT','Location','northeast');
 xlabel('VOT [€/h]');
 xticks(ResNumb1(:,2));
+ylim ([0 inf]);
 %xtickangle(90)
 ylabel('Reservations');
 hold off
@@ -60,9 +61,10 @@ title('Shift in Reservations');
 % maxReservations = max(ResNumb3,ResNumb2);
 % maxReservations = maxReservations(:,1);
 % ylim([0 max(maxReservations)]);
-legend('Reservations FP','Reservations ABDP','Location','northwest');
-xlabel('IF [€]');
+legend('Reservations FP','Reservations ABDP','Location','northeast');
+xlabel('VOT [€]');
 xticks(ResNumb2(:,2));
+ylim ([0 inf]);
 %xtickangle(90)
 ylabel('Reservations');
 hold off
@@ -78,9 +80,10 @@ title('Shift in Reservations');
 % maxReservations = max(ResNumb3,ResNumb2);
 % maxReservations = maxReservations(:,1);
 % ylim([0 max(maxReservations)]);
-legend('Reservations FP','Reservations TBDP','Location','northwest');
-xlabel('IF [€]');
+legend('Reservations FP','Reservations TBDP','Location','northeast');
+xlabel('VOT [€]');
 xticks(ResNumb2(:,2));
+ylim ([0 inf]);
 %xtickangle(90)
 ylabel('Reservations');
 hold off

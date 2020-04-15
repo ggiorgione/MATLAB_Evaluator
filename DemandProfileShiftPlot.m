@@ -160,7 +160,7 @@ yyaxis right
 stairs((timeBasePrice(:,1)),(timeBasePrice(:,2)),'--k');
 hold on
 plot(fixedPrice(:,1),fixedPrice(:,2),':k');
-ylim([0 0.2]);
+ylim([0 inf]);
 ylabel('Time Based Price [€/min]');
 legend('TBDP Demand Profile','FP Demand Profile','TBDP','FP','location','northeast');
 hold off

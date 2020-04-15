@@ -93,16 +93,16 @@ AccessTime1_VOT_sum(:,2) = AccessTime1_VOT_unique;                %finalize the 
 AccessTime1_VOT_sum = [AccessTime1_VOT_sum(:,2) AccessTime1_VOT_sum(:,1)];
 
 %Check that there are all the VOTs
-if length(AccessTime1_VOT_sum(:,1)) ~= length(IF(:,1))
-    for ctrl = 1:length(IF)
-        if ctrl == (length(IF)-1)  && length(AccessTime1_VOT_sum(:,1)) ~= length(IF(:,1))
-            AccessTime1_VOT_sum = insertrows(AccessTime1_VOT_sum,IF(ctrl+1,:),ctrl+1);
+if length(AccessTime1_VOT_sum(:,1)) ~= length(VOT(:,1))
+    for ctrl = 1:length(VOT)
+        if ctrl == (length(VOT)-1)  && length(AccessTime1_VOT_sum(:,1)) ~= length(VOT(:,1))
+            AccessTime1_VOT_sum = insertrows(AccessTime1_VOT_sum,VOT(ctrl+1,:),ctrl+1);
         end
-        if AccessTime1_VOT_sum(:,1) == IF(1,1)
-            AccessTime1_VOT_sum(2:length(IF),:) = IF(2:length(IF),:);
+        if AccessTime1_VOT_sum(:,1) == VOT(1,1)
+            AccessTime1_VOT_sum(2:length(VOT),:) = VOT(2:length(VOT),:);
         end
-        if AccessTime1_VOT_sum(ctrl,1) ~= IF(ctrl,1) && length(AccessTime1_VOT_sum(:,1)) ~= length(IF(:,1))
-            AccessTime1_VOT_sum = insertrows(AccessTime1_VOT_sum,IF(ctrl,:),ctrl);
+        if AccessTime1_VOT_sum(ctrl,1) ~= VOT(ctrl,1) && length(AccessTime1_VOT_sum(:,1)) ~= length(VOT(:,1))
+            AccessTime1_VOT_sum = insertrows(AccessTime1_VOT_sum,VOT(ctrl,:),ctrl);
         end
     end 
 end
@@ -121,16 +121,16 @@ AccessTime2_VOT_sum(:,2) = AccessTime2_VOT_unique;                %finalize the 
 AccessTime2_VOT_sum = [AccessTime2_VOT_sum(:,2) AccessTime2_VOT_sum(:,1)];
 
 %Check that there are all the VOTs
-if length(AccessTime2_VOT_sum(:,1)) ~= length(IF(:,1))
-    for ctrl = 1:length(IF)
-        if ctrl == (length(IF)-1) && length(AccessTime2_VOT_sum(:,1)) ~= length(IF(:,1))
-            AccessTime2_VOT_sum = insertrows(AccessTime2_VOT_sum,IF(ctrl+1,:),ctrl+1);
+if length(AccessTime2_VOT_sum(:,1)) ~= length(VOT(:,1))
+    for ctrl = 1:length(VOT)
+        if ctrl == (length(VOT)-1) && length(AccessTime2_VOT_sum(:,1)) ~= length(VOT(:,1))
+            AccessTime2_VOT_sum = insertrows(AccessTime2_VOT_sum,VOT(ctrl+1,:),ctrl+1);
         end
-        if AccessTime2_VOT_sum(:,1) == IF(1,1)
-            AccessTime2_VOT_sum(2:length(IF),:) = IF(2:length(IF),:);
+        if AccessTime2_VOT_sum(:,1) == VOT(1,1)
+            AccessTime2_VOT_sum(2:length(VOT),:) = VOT(2:length(VOT),:);
         end
-        if AccessTime2_VOT_sum(ctrl,1) ~= IF(ctrl,1) && length(AccessTime2_VOT_sum(:,1)) ~= length(IF(:,1))
-            AccessTime2_VOT_sum = insertrows(AccessTime2_VOT_sum,IF(ctrl,:),ctrl);
+        if AccessTime2_VOT_sum(ctrl,1) ~= VOT(ctrl,1) && length(AccessTime2_VOT_sum(:,1)) ~= length(VOT(:,1))
+            AccessTime2_VOT_sum = insertrows(AccessTime2_VOT_sum,VOT(ctrl,:),ctrl);
         end
     end 
 end
@@ -153,16 +153,16 @@ AccessTime3_VOT_sum(:,2) = AccessTime3_VOT_unique;                %finalize the 
 AccessTime3_VOT_sum = [AccessTime3_VOT_sum(:,2) AccessTime3_VOT_sum(:,1)];
 
 %Check that there are all the VOTs
-if length(AccessTime3_VOT_sum(:,1)) ~= length(IF(:,1))
-    for ctrl = 1:length(IF)
-        if ctrl == (length(IF)-1)  && length(AccessTime3_VOT_sum(:,1)) ~= length(IF(:,1))
-            AccessTime3_VOT_sum = insertrows(AccessTime3_VOT_sum,IF(ctrl+1,:),ctrl+1);
+if length(AccessTime3_VOT_sum(:,1)) ~= length(VOT(:,1))
+    for ctrl = 1:length(VOT)
+        if ctrl == (length(VOT)-1)  && length(AccessTime3_VOT_sum(:,1)) ~= length(VOT(:,1))
+            AccessTime3_VOT_sum = insertrows(AccessTime3_VOT_sum,VOT(ctrl+1,:),ctrl+1);
         end
-        if AccessTime3_VOT_sum(:,1) == IF(1,1)
-            AccessTime3_VOT_sum(2:length(IF),:) = IF(2:length(IF),:);
+        if AccessTime3_VOT_sum(:,1) == VOT(1,1)
+            AccessTime3_VOT_sum(2:length(VOT),:) = VOT(2:length(VOT),:);
         end
-        if AccessTime3_VOT_sum(ctrl,1) ~= IF(ctrl,1) && length(AccessTime3_VOT_sum(:,1)) ~= length(IF(:,1))
-            AccessTime3_VOT_sum = insertrows(AccessTime3_VOT_sum,IF(ctrl,:),ctrl);
+        if AccessTime3_VOT_sum(ctrl,1) ~= VOT(ctrl,1) && length(AccessTime3_VOT_sum(:,1)) ~= length(VOT(:,1))
+            AccessTime3_VOT_sum = insertrows(AccessTime3_VOT_sum,VOT(ctrl,:),ctrl);
         end
     end 
 end
@@ -182,20 +182,35 @@ AccessTime4_VOT_sum(:,2) = AccessTime4_VOT_unique;                %finalize the 
 AccessTime4_VOT_sum = [AccessTime4_VOT_sum(:,2) AccessTime4_VOT_sum(:,1)];
 
 %Check that there are all the VOTs
-if length(AccessTime4_VOT_sum(:,1)) ~= length(IF(:,1))
-    for ctrl = 1:length(IF)
-        if ctrl == (length(IF)-1)  && length(AccessTime4_VOT_sum(:,1)) ~= length(IF(:,1))
-            AccessTime4_VOT_sum = insertrows(AccessTime4_VOT_sum,IF(ctrl+1,:),ctrl+1);
+if length(AccessTime4_VOT_sum(:,1)) ~= length(VOT(:,1))
+    for ctrl = 1:length(VOT)
+        if ctrl == (length(VOT)-1)  && length(AccessTime4_VOT_sum(:,1)) ~= length(VOT(:,1))
+            AccessTime4_VOT_sum = insertrows(AccessTime4_VOT_sum,VOT(ctrl+1,:),ctrl+1);
         end
-        if AccessTime4_VOT_sum(:,1) == IF(1,1)
-            AccessTime4_VOT_sum(2:length(IF),:) = IF(2:length(IF),:);
+        if AccessTime4_VOT_sum(:,1) == VOT(1,1)
+            AccessTime4_VOT_sum(2:length(VOT),:) = VOT(2:length(VOT),:);
         end
-        if AccessTime4_VOT_sum(ctrl,1) ~= IF(ctrl,1) && length(AccessTime4_VOT_sum(:,1)) ~= length(IF(:,1))
-            AccessTime4_VOT_sum = insertrows(AccessTime4_VOT_sum,IF(ctrl,:),ctrl);
+        if AccessTime4_VOT_sum(ctrl,1) ~= VOT(ctrl,1) && length(AccessTime4_VOT_sum(:,1)) ~= length(VOT(:,1))
+            AccessTime4_VOT_sum = insertrows(AccessTime4_VOT_sum,VOT(ctrl,:),ctrl);
         end
     end 
 end
 AccessTime4_VOT_sum = sortrows(AccessTime4_VOT_sum);
+
+scatter(AccessTime1_VOT_sum(:,1),AccessTime2_VOT_sum(:,2),'filled','r');
+hold on
+xticks(1:length(VOT));
+scatter(AccessTime1_VOT_sum(:,1),AccessTime3_VOT_sum(:,2),'filled','b');
+scatter(AccessTime1_VOT_sum(:,1),AccessTime4_VOT_sum(:,2),'filled','m');
+legend('Fixed Pricing','Availability Based Dynamic Pricing','Time Based Dynamic Pricing','location','best');
+xlabel('VOT');
+ylabel('Access Time [s]');
+title ('Access Time');
+ylim ([0 inf]);
+xlim ([0 length(VOT)+1]);
+hold off
+filename = sprintf('AccessTimeVariation.png');
+saveas(gca,filename);
 
 %DELTA
 Delta2_3 = AccessTime2_VOT_sum(:,1)-AccessTime3_VOT_sum(:,1);   %Check the delta between the 2 simulation

@@ -86,7 +86,6 @@ for i = 1:length(SimTypeStr)
 end
 
 % Differences between FP and ABDP and TBDP in percentage
-
 activities.FP_ABDP{1,3} = 0;
 activities.FP_TBDP{1,3} = 0;
 for i = 1:length(activities.FP)
@@ -101,6 +100,7 @@ clear temp_b;
 clear temp_c;
 
 %% Divides the previous counts by VOT
+
 % list of all agents who didn't execute their plan
 clear activityNotExecuted;
 for i = 1:length(SimTypeStr)
@@ -130,6 +130,14 @@ for i = 4:length(SimTypeStr)
 end
 clear temp_a;
 clear temp_b;
+
+% Score of plans lost per VOT
+for i = 4:length(SimTypeStr)
+    scoreActivityNotExecuted.(string(SimTypeStr(i))) = sortrows(activityNotExecuted.(string(SimTypeStr(i))),2);
+    temp_a = accumarray(round(cell2mat(scoreActivityNotExecuted.(string(SimTypeStr(i)))(:,2))),cell2mat(scoreActivityNotExecuted.(string(SimTypeStr(i)))(:,3)));
+    scoreActivityNotExecuted.(string(SimTypeStr(i)) + '_' + VOTStr) = [VOTlist temp_a];
+end
+clear temp_a;
 
 %% Scoring count
 clear score;
@@ -168,3 +176,24 @@ for i = 1:length(SimTypeStr)
     score.(string(SimTypeStr(i)) + '_' + VOTStr) = unique(score.(string(SimTypeStr(i)) + '_' + VOTStr));
     score.(string(SimTypeStr(i)) + '_' + VOTStr) = [VOTlist score.(string(SimTypeStr(i)) + '_' + VOTStr)];
 end
+clear rows
+
+%% Acquire parameters to create the normal distribution for the score
+
+colors = {'r';'b';'m';'y';'c'};
+for i = 1:length(SimTypeStr)
+    NormDistParameters = fitdist(sortrows(cell2mat(score.(string(SimTypeStr(i)))(:,3))),'Normal');
+    NormDist = normpdf(sortrows(cell2mat(score.(string(SimTypeStr(i)))(:,3))),NormDistParameters.mu,NormDistParameters.sigma);
+    plotScatter = plot(sortrows(cell2mat(score.(string(SimTypeStr(i)))(:,3))),NormDist,colors{i});
+    hold on
+end
+title('Score Normal Distribution');
+legend('FP','ABDP','TBDP','FP-ABDP','FP-TBDP','location','northwest');
+filename = sprintf('Score_Normal_Distribution.png');
+saveas(gca,filename);
+
+
+
+
+
+

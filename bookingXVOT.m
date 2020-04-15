@@ -26,16 +26,16 @@ c = VOTlist;
 bVOTCounts=bVOTCounts(idx,:);
 
 %Check that there are all the VOTs
-if length(bVOTCounts(:,1)) ~= length(IF(:,1))
-    for ctrl = 1:length(IF)
-        if ctrl == (length(IF)-1)  && length(bVOTCounts(:,1)) ~= length(IF(:,1))
-            bVOTCounts = insertrows(bVOTCounts,IF(ctrl+1,:),ctrl+1);
+if length(bVOTCounts(:,1)) ~= length(VOT(:,1))
+    for ctrl = 1:length(VOT)
+        if ctrl == (length(VOT)-1)  && length(bVOTCounts(:,1)) ~= length(VOT(:,1))
+            bVOTCounts = insertrows(bVOTCounts,VOT(ctrl+1,:),ctrl+1);
         end
-        if bVOTCounts(:,1) == IF(1,1)
-            bVOTCounts(2:length(IF),:) = IF(2:length(IF),:)
+        if bVOTCounts(:,1) == VOT(1,1)
+            bVOTCounts(2:length(VOT),:) = VOT(2:length(VOT),:)
         end
-        if bVOTCounts(ctrl,1) ~= IF(ctrl,1) && length(bVOTCounts(:,1)) ~= length(IF(:,1))
-            bVOTCounts = insertrows(bVOTCounts,IF(ctrl,:),ctrl);
+        if bVOTCounts(ctrl,1) ~= VOT(ctrl,1) && length(bVOTCounts(:,1)) ~= length(VOT(:,1))
+            bVOTCounts = insertrows(bVOTCounts,VOT(ctrl,:),ctrl);
         end
     end 
 end

@@ -80,18 +80,18 @@ SRS4_VOT = sortrows(SRS4_VOT,3,'ascend');           %sort by the VOT
 % 
 % %Check that there are all the VOTs
 % if isempty(length(SRS1_VOT_sum)) == 1
-%     SRS1_VOT_sum = IF;
+%     SRS1_VOT_sum = VOT;
 % else
-%     if SRS1_VOT_sum(end,1) == IF(end,1)
-%         if length(SRS1_VOT_sum) ~= length(IF)
+%     if SRS1_VOT_sum(end,1) == VOT(end,1)
+%         if length(SRS1_VOT_sum) ~= length(VOT)
 %             for ctrl = 1:1:length(ctrl)
-%                 if SRS1_VOT_sum(ctrl,1) ~= IF(ctrl,1)
-%                     SRS1_VOT_sum = insertrows(SRS1_VOT_sum,IF(ctrl,:),ctrl-1);
+%                 if SRS1_VOT_sum(ctrl,1) ~= VOT(ctrl,1)
+%                     SRS1_VOT_sum = insertrows(SRS1_VOT_sum,VOT(ctrl,:),ctrl-1);
 %                 end
 %             end
 %         end
 %     else
-%         SRS1_VOT_sum = insertrows(SRS1_VOT_sum,IF(end,:),length(ctrl));    
+%         SRS1_VOT_sum = insertrows(SRS1_VOT_sum,VOT(end,:),length(ctrl));    
 %     end
 % end
 % 
@@ -110,18 +110,18 @@ SRS4_VOT = sortrows(SRS4_VOT,3,'ascend');           %sort by the VOT
 % 
 % %Check that there are all the VOTs
 % if isempty(length(SRS2_VOT_sum)) == 1
-%     SRS2_VOT_sum = IF;
+%     SRS2_VOT_sum = VOT;
 % else
-%     if SRS2_VOT_sum(end,1) == IF(end,1)
-%         if length(SRS2_VOT_sum) ~= length(IF)
+%     if SRS2_VOT_sum(end,1) == VOT(end,1)
+%         if length(SRS2_VOT_sum) ~= length(VOT)
 %             for ctrl = 1:1:length(ctrl)
-%                 if SRS2_VOT_sum(ctrl,1) ~= IF(ctrl,1)
-%                     SRS2_VOT_sum = insertrows(SRS2_VOT_sum,IF(ctrl,:),ctrl-1);
+%                 if SRS2_VOT_sum(ctrl,1) ~= VOT(ctrl,1)
+%                     SRS2_VOT_sum = insertrows(SRS2_VOT_sum,VOT(ctrl,:),ctrl-1);
 %                 end
 %             end
 %         end
 %     else
-%         SRS2_VOT_sum = insertrows(SRS2_VOT_sum,IF(end,:),length(ctrl));    
+%         SRS2_VOT_sum = insertrows(SRS2_VOT_sum,VOT(end,:),length(ctrl));    
 %     end
 % end
 % 
@@ -143,16 +143,16 @@ SRS2_VOT_sum(:,2) = SRS2_VOT_unique;                %finalize the matrix setting
 SRS2_VOT_sum = [SRS2_VOT_sum(:,2) SRS2_VOT_sum(:,1)];
 
 %Check that there are all the VOTs
-if length(SRS2_VOT_sum(:,1)) ~= length(IF(:,1))
-    for ctrl = 1:length(IF)
-        if ctrl == (length(IF)-1) && length(SRS2_VOT_sum(:,1)) ~= length(IF(:,1))
-            SRS2_VOT_sum = insertrows(SRS2_VOT_sum,IF(ctrl+1,:),ctrl+1);
+if length(SRS2_VOT_sum(:,1)) ~= length(VOT(:,1))
+    for ctrl = 1:length(VOT)
+        if ctrl == (length(VOT)-1) && length(SRS2_VOT_sum(:,1)) ~= length(VOT(:,1))
+            SRS2_VOT_sum = insertrows(SRS2_VOT_sum,VOT(ctrl+1,:),ctrl+1);
         end
-        if SRS2_VOT_sum(:,1) == IF(1,1)
-            SRS2_VOT_sum(2:length(IF),:) = IF(2:length(IF),:);
+        if SRS2_VOT_sum(:,1) == VOT(1,1)
+            SRS2_VOT_sum(2:length(VOT),:) = VOT(2:length(VOT),:);
         end
-        if SRS2_VOT_sum(ctrl,1) ~= IF(ctrl,1) && length(SRS2_VOT_sum(:,1)) ~= length(IF(:,1))
-            SRS2_VOT_sum = insertrows(SRS2_VOT_sum,IF(ctrl,:),ctrl);
+        if SRS2_VOT_sum(ctrl,1) ~= VOT(ctrl,1) && length(SRS2_VOT_sum(:,1)) ~= length(VOT(:,1))
+            SRS2_VOT_sum = insertrows(SRS2_VOT_sum,VOT(ctrl,:),ctrl);
         end
     end 
 end
@@ -172,16 +172,16 @@ SRS3_VOT_sum(:,2) = SRS3_VOT_unique;                %finalize the matrix setting
 SRS3_VOT_sum = [SRS3_VOT_sum(:,2) SRS3_VOT_sum(:,1)];
 
 %Check that there are all the VOTs
-if length(SRS3_VOT_sum(:,1)) ~= length(IF(:,1))
-    for ctrl = 1:length(IF)
-        if ctrl == (length(IF)-1) && length(SRS3_VOT_sum(:,1)) ~= length(IF(:,1))
-            SRS3_VOT_sum = insertrows(SRS3_VOT_sum,IF(ctrl+1,:),ctrl+1);
+if length(SRS3_VOT_sum(:,1)) ~= length(VOT(:,1))
+    for ctrl = 1:length(VOT)
+        if ctrl == (length(VOT)-1) && length(SRS3_VOT_sum(:,1)) ~= length(VOT(:,1))
+            SRS3_VOT_sum = insertrows(SRS3_VOT_sum,VOT(ctrl+1,:),ctrl+1);
         end
-        if SRS3_VOT_sum(:,1) == IF(1,1)
-            SRS3_VOT_sum(2:length(IF),:) = IF(2:length(IF),:);
+        if SRS3_VOT_sum(:,1) == VOT(1,1)
+            SRS3_VOT_sum(2:length(VOT),:) = VOT(2:length(VOT),:);
         end
-        if SRS3_VOT_sum(ctrl,1) ~= IF(ctrl,1) && length(SRS3_VOT_sum(:,1)) ~= length(IF(:,1))
-            SRS3_VOT_sum = insertrows(SRS3_VOT_sum,IF(ctrl,:),ctrl);
+        if SRS3_VOT_sum(ctrl,1) ~= VOT(ctrl,1) && length(SRS3_VOT_sum(:,1)) ~= length(VOT(:,1))
+            SRS3_VOT_sum = insertrows(SRS3_VOT_sum,VOT(ctrl,:),ctrl);
         end
     end 
 end
@@ -204,16 +204,16 @@ SRS4_VOT_sum(:,2) = SRS4_VOT_unique;                %finalize the matrix setting
 SRS4_VOT_sum = [SRS4_VOT_sum(:,2) SRS4_VOT_sum(:,1)];
 
 %Check that there are all the VOTs
-if length(SRS4_VOT_sum(:,1)) ~= length(IF(:,1))
-    for ctrl = 1:length(IF)
-        if ctrl == (length(IF)-1) && length(SRS4_VOT_sum(:,1)) ~= length(IF(:,1))
-            SRS4_VOT_sum = insertrows(SRS4_VOT_sum,IF(ctrl+1,:),ctrl+1);
+if length(SRS4_VOT_sum(:,1)) ~= length(VOT(:,1))
+    for ctrl = 1:length(VOT)
+        if ctrl == (length(VOT)-1) && length(SRS4_VOT_sum(:,1)) ~= length(VOT(:,1))
+            SRS4_VOT_sum = insertrows(SRS4_VOT_sum,VOT(ctrl+1,:),ctrl+1);
         end
-        if SRS4_VOT_sum(:,1) == IF(1,1)
-            SRS4_VOT_sum(2:length(IF),:) = IF(2:length(IF),:);
+        if SRS4_VOT_sum(:,1) == VOT(1,1)
+            SRS4_VOT_sum(2:length(VOT),:) = VOT(2:length(VOT),:);
         end
-        if SRS4_VOT_sum(ctrl,1) ~= IF(ctrl,1) && length(SRS4_VOT_sum(:,1)) ~= length(IF(:,1))
-            SRS4_VOT_sum = insertrows(SRS4_VOT_sum,IF(ctrl,:),ctrl);
+        if SRS4_VOT_sum(ctrl,1) ~= VOT(ctrl,1) && length(SRS4_VOT_sum(:,1)) ~= length(VOT(:,1))
+            SRS4_VOT_sum = insertrows(SRS4_VOT_sum,VOT(ctrl,:),ctrl);
         end
     end 
 end
@@ -237,26 +237,26 @@ Delta2_4 = SRS2_VOT_sum(:,1)-SRS4_VOT_sum(:,1);   %Check the delta between the 2
 % saveas(gca,filename);
 
 %Plot the Delta time 2-3
-scatter(IF(:,1),Delta2_3,'b');
+scatter(VOT(:,1),Delta2_3,'b');
 hold on
 plot(0);
 title('Shifting in Rental Starting Time');
 xticks(SRS2_VOT_unique);
 xtickangle(90);
-xlabel('IF [€]');
+xlabel('VOT [€]');
 ylabel('Shifting Rental Starting Time mean [h]');
 filename = sprintf('Delta time 2-3.png');
 saveas(gca,filename);
 hold off
 
 %Plot the Delta time 2-4
-scatter(IF(:,1),Delta2_4,'m');
+scatter(VOT(:,1),Delta2_4,'m');
 hold on
 plot(0);
 title('Shifting in Rental Starting Time');
 xticks(SRS2_VOT_unique);
 xtickangle(90);
-xlabel('IF [€]');
+xlabel('VOT [€]');
 ylabel('Shifting Rental Starting Time mean [h]');
 filename = sprintf('Delta time 2-4.png');
 saveas(gca,filename);

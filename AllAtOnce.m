@@ -86,13 +86,12 @@ for z=SimTrial
         run('NReservXVOT.m');
         run('revenueCalculatorPlot.m');
         run('bookingXVOTplot.m');
-        run('AnalisysXVOT.m')
-        
         if y==1
             continue
         end
         run('StationsBookingPlot.m');
         run('Spider_Plot.m');
+        run('AnalisysXVOT.m')
 
         
         copyfile ('/Users/giulio.giorgione/Documents/MATLAB/SimEvaluator', sprintf('/Users/giulio.giorgione/Documents/MATLAB/Berlin_%i/%i/%i/',z,T));

@@ -63,7 +63,7 @@ saveas(gca,filename);
 bar(Timehour,DemandPerc,'stacked')
 set(gca, 'YScale', 'log')
 xlim([0 24]);
-ylim([0 100]);
+ylim([0 inf]);
 xlabel('Time [h]');
 ylabel('Modal Split [%]');
 title('Modal Split');
@@ -102,7 +102,7 @@ saveas(gca,filename);
 bar(Timehour,DemandPerc,'stacked')
 set(gca, 'YScale', 'log')
 xlim([0 24]);
-ylim([0 100]);
+ylim([0 inf]);
 xlabel('Time [h]');
 ylabel('Modal Split [%]');
 title('Modal Split');
@@ -141,7 +141,7 @@ saveas(gca,filename);
 bar(Timehour,DemandPerc,'stacked')
 set(gca, 'YScale', 'log')
 xlim([0 24]);
-ylim([0 100]);
+ylim([0 inf]);
 xlabel('Time [h]');
 ylabel('Modal Split [%]');
 title('Modal Split');

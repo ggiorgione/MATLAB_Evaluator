@@ -35,7 +35,7 @@ totaltotal = totaltotal';
 c = categorical({'Sim01','Sim02','Sim03','Sim04'});
 bar(c,totaltotal,'stacked')
 legend('Soft Modes','Public Transport','Car','Carsharing');
-ylim([0 120]);
+ylim([0 inf]);
 hold off
 
 filename = sprintf('Mode_Shift_Histogram.mat');

@@ -1,8 +1,11 @@
 % Analysis of the Python code about the comparisons on the agents' bookings
 
-SimRunK = 2:1:4; % Simulations run that we are interested in (FP, ABDP, TBDP)
-SimTypeStr = {'FP';'ABDP';'TBDP';'FP_ABDP';'FP_TBDP'};
-VOTStr = {'VOT'};
+clear modes
+clear Modes
+clear modeUsage
+clear activities
+clear activityMade
+clear activityNotExecuted
 
 %% Import text files
 
@@ -88,12 +91,22 @@ end
 % Differences between FP and ABDP and TBDP in percentage
 activities.FP_ABDP{1,3} = 0;
 activities.FP_TBDP{1,3} = 0;
-for i = 1:length(activities.FP)
+if length(activities.FP) == length(activities.ABDP)
+    for i = 1:length(activities.FP)
+        temp_a = cell2mat(activities.FP(i,2));
+        temp_b = cell2mat(activities.FP_ABDP(i,2));
+        temp_c = cell2mat(activities.FP_TBDP(i,2));
+        activities.FP_ABDP{i,3} = ((temp_a-temp_b)/temp_a)*100;
+        activities.FP_TBDP{i,3} = ((temp_a-temp_c)/temp_a)*100;
+    end
+else
+    for i = 1:length(activities.FP)
     temp_a = cell2mat(activities.FP(i,2));
     temp_b = cell2mat(activities.FP_ABDP(i+1,2));
     temp_c = cell2mat(activities.FP_TBDP(i+1,2));
     activities.FP_ABDP{i+1,3} = ((temp_a-temp_b)/temp_a)*100;
     activities.FP_TBDP{i+1,3} = ((temp_a-temp_c)/temp_a)*100;
+    end
 end
 clear temp_a;
 clear temp_b;
@@ -102,7 +115,7 @@ clear temp_c;
 %% Divides the previous counts by VOT
 
 % list of all agents who didn't execute their plan
-clear activityNotExecuted;
+activityNotExecuted = [];
 for i = 1:length(SimTypeStr)
     for j = 1:length(allPlans.(string(SimTypeStr{i})))
         if ~isnan(cell2mat(allPlans.(string(SimTypeStr{i}))(j,1))) && ~isnan(cell2mat(allPlans.(string(SimTypeStr{i}))(j+1,1)))
@@ -110,34 +123,37 @@ for i = 1:length(SimTypeStr)
         end
     end
 end
+activityNotExecuted = [];
+if isempty(activityNotExecuted)
+else    
+    for i = 4:length(SimTypeStr) %remove the []
+        temp_size = size(activityNotExecuted.(string(SimTypeStr(i))));
+        activityNotExecuted.(string(SimTypeStr(i))) = activityNotExecuted.(string(SimTypeStr(i)))(~cellfun('isempty',activityNotExecuted.(string(SimTypeStr(i)))));
+        activityNotExecuted.(string(SimTypeStr(i))) = reshape(activityNotExecuted.(string(SimTypeStr(i))),[],temp_size(:,2));
+    end
+    clear temp_size
 
-for i = 4:length(SimTypeStr) %remove the []
-    temp_size = size(activityNotExecuted.(string(SimTypeStr(i))));
-    activityNotExecuted.(string(SimTypeStr(i))) = activityNotExecuted.(string(SimTypeStr(i)))(~cellfun('isempty',activityNotExecuted.(string(SimTypeStr(i)))));
-    activityNotExecuted.(string(SimTypeStr(i))) = reshape(activityNotExecuted.(string(SimTypeStr(i))),[],temp_size(:,2));
+    % Total number of plans lost
+    activityNotExecuted.totalFP_ABDP = length(activityNotExecuted.FP_ABDP);
+    activityNotExecuted.totalFP_TBDP = length(activityNotExecuted.FP_TBDP);
+
+    % Plans lost per VOT
+    for i = 4:length(SimTypeStr)
+        activityNotExecuted.(string(SimTypeStr(i))) = sortrows(activityNotExecuted.(string(SimTypeStr(i))),2);
+        [temp_a,temp_b] = groupcounts(cell2mat(activityNotExecuted.(string(SimTypeStr(i)))(:,2)));
+        activityNotExecuted.(string(SimTypeStr(i)) + '_' + VOTStr) = [temp_b temp_a];
+    end
+    clear temp_a;
+    clear temp_b;
+
+    % Score of plans lost per VOT
+    for i = 4:length(SimTypeStr)
+        scoreActivityNotExecuted.(string(SimTypeStr(i))) = sortrows(activityNotExecuted.(string(SimTypeStr(i))),2);
+        temp_a = accumarray(round(cell2mat(scoreActivityNotExecuted.(string(SimTypeStr(i)))(:,2))),cell2mat(scoreActivityNotExecuted.(string(SimTypeStr(i)))(:,3)));
+        scoreActivityNotExecuted.(string(SimTypeStr(i)) + '_' + VOTStr) = [VOTlist temp_a];
+    end
+    clear temp_a;
 end
-clear temp_size
-
-% Total number of plans lost
-activityNotExecuted.totalFP_ABDP = length(activityNotExecuted.FP_ABDP);
-activityNotExecuted.totalFP_TBDP = length(activityNotExecuted.FP_TBDP);
-
-% Plans lost per VOT
-for i = 4:length(SimTypeStr)
-    activityNotExecuted.(string(SimTypeStr(i))) = sortrows(activityNotExecuted.(string(SimTypeStr(i))),2);
-    [temp_a,temp_b] = groupcounts(cell2mat(activityNotExecuted.(string(SimTypeStr(i)))(:,2)));
-    activityNotExecuted.(string(SimTypeStr(i)) + '_' + VOTStr) = [temp_b temp_a];
-end
-clear temp_a;
-clear temp_b;
-
-% Score of plans lost per VOT
-for i = 4:length(SimTypeStr)
-    scoreActivityNotExecuted.(string(SimTypeStr(i))) = sortrows(activityNotExecuted.(string(SimTypeStr(i))),2);
-    temp_a = accumarray(round(cell2mat(scoreActivityNotExecuted.(string(SimTypeStr(i)))(:,2))),cell2mat(scoreActivityNotExecuted.(string(SimTypeStr(i)))(:,3)));
-    scoreActivityNotExecuted.(string(SimTypeStr(i)) + '_' + VOTStr) = [VOTlist temp_a];
-end
-clear temp_a;
 
 %% Scoring count
 clear score;
@@ -162,11 +178,7 @@ for i = 1:length(SimTypeStr)
     score.(string(SimTypeStr(i))) = sortrows(score.(string(SimTypeStr(i))),2);
     [temp_a,temp_b] = groupcounts(cell2mat(score.(string(SimTypeStr(i)))(:,2)));
     score.(string(SimTypeStr(i)) + '_' + VOTStr) = [temp_b temp_a];
-end
-clear temp_a;
-clear temp_b;
-
-for i = 1:length(SimTypeStr)
+%     i = 1:length(SimTypeStr)
     score.(string(SimTypeStr(i)) + '_' + VOTStr) = zeros(size(score.(string(SimTypeStr(i))), 1), 1);
     for v = unique(cell2mat(score.(string(SimTypeStr(i)))(:,2)))'
        rows = cell2mat(score.(string(SimTypeStr(i)))(:, 2)) == v;
@@ -174,9 +186,11 @@ for i = 1:length(SimTypeStr)
        score.(string(SimTypeStr(i)) + '_' + VOTStr)(rows) = sums(end);     
     end
     score.(string(SimTypeStr(i)) + '_' + VOTStr) = unique(score.(string(SimTypeStr(i)) + '_' + VOTStr));
-    score.(string(SimTypeStr(i)) + '_' + VOTStr) = [VOTlist score.(string(SimTypeStr(i)) + '_' + VOTStr)];
+    score.(string(SimTypeStr(i)) + '_' + VOTStr) = [temp_b score.(string(SimTypeStr(i)) + '_' + VOTStr)];
 end
 clear rows
+clear temp_a;
+clear temp_b;
 
 %% Acquire parameters to create the normal distribution for the score
 
@@ -192,6 +206,29 @@ legend('FP','ABDP','TBDP','FP-ABDP','FP-TBDP','location','northwest');
 filename = sprintf('Score_Normal_Distribution.png');
 saveas(gca,filename);
 
+%% Count how many activities every agents did
+activityXAgent = [];
+for i = 1:length(SimTypeStr)
+    count = find(~isnan(cell2mat(allPlans.(string(SimTypeStr(i)))(:,1))));
+    for j = 1:(length(count)-1)
+        temp_a = sortrows(score.(string(SimTypeStr{i})));
+        activityXAgent.(string(SimTypeStr(i)))(j,:) = [temp_a(j,1) count(j+1)-count(j)];
+    end
+    activityXAgent.(string(SimTypeStr(i)))(j+1,:) = [temp_a(j+1,1) (length(allPlans.(string(SimTypeStr{i}))))-count(j+1)+1];
+    clear temp_a
+end
+
+%% Count how many modes every agents used
+modeXAgent = [];
+for i = 1:length(SimTypeStr)
+    count = find(~isnan(cell2mat(allPlans.(string(SimTypeStr(i)))(:,1))));
+    for j = 1:(length(count)-1)
+        temp_a = sortrows(score.(string(SimTypeStr{i})));
+        modeXAgent.(string(SimTypeStr(i)))(j,:) = [temp_a(j,1) count(j+1)-count(j)];
+    end
+    modeXAgent.(string(SimTypeStr(i)))(j+1,:) = [temp_a(j+1,1) (length(allPlans.(string(SimTypeStr{i}))))-count(j+1)+1];
+    clear temp_a
+end
 
 
 

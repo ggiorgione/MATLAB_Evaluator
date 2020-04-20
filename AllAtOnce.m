@@ -1,9 +1,13 @@
-ITERS=300;                                                                              %Number of last iteration to find the folder
-SimTrial = (15); % z: ["Berlin_"SimTrial"]; 
-SimType = (3:1:3);  % T: 1 = Heterogeneus --- 2 = Radial --- 3 = CoAxial
-SimRun = (1:1:4);   % y                                                                  %Simulations name to find the folder
-DayHours = 30;                                                                         %Simulation Time
+ITERS=600;          %Number of last iteration to find the folder
+SimTrial = (9999);  % z: ["Berlin_"SimTrial"]; 
+SimType = (2);  % T: 1 = Heterogeneus --- 2 = Radial --- 3 = CoAxial
+SimRun = (1:1:4);   % y Simulations name to find the folder
+DayHours = 30;      %Simulation Time
 DaySeconds = DayHours*3600;
+SimRunK = 2:1:4;    % Simulations run that we are interested in (FP, ABDP, TBDP)
+SimTypeStr = {'FP';'ABDP';'TBDP';'FP_ABDP';'FP_TBDP'};
+SimTypeStrPlot = {'FP';'ABDP';'TBDP';'FP-ABDP';'FP-TBDP'};
+VOTStr = {'VOT'};
 
 %IFs (Income Factors)
 VOT = [0.5 2 3 4; 0 0 0 0];
@@ -62,7 +66,6 @@ for z=SimTrial
 
             run('DrivingBookingFleetAccessDistance.m');
             run('DemandProfileShift.m');
-            %run('Equilibrium_at_the_Station.m');
             run('HeatmapBookings.m');
             run('ModalShiftWalking.m');
             run('modalShiftXTime.m');
@@ -75,10 +78,8 @@ for z=SimTrial
         end
 
         run('AccessTimeEvaluation.m');
-        %run('AccessTimePlot.m');
         run('ReservNumber.m');
         run('DemandProfileShiftPlot.m');
-        %run('Duration_Reservation.m');
         run('modalShiftXTime_plot.m');
         run('ModeShiftEva.m');
         run('Plot_Fleet_Utilization.m');
@@ -91,7 +92,10 @@ for z=SimTrial
         end
         run('StationsBookingPlot.m');
         run('Spider_Plot.m');
-        run('AnalisysXVOT.m')
+        run('AnalisysXVOT.m');
+        run('AnalisysXVOTplot.m');
+        run('KmeansCluster.m');
+
 
         
         copyfile ('/Users/giulio.giorgione/Documents/MATLAB/SimEvaluator', sprintf('/Users/giulio.giorgione/Documents/MATLAB/Berlin_%i/%i/%i/',z,T));

@@ -1,0 +1,49 @@
+%Spider Plot
+%#Bookings, totRevenue, distXveh, timeXveh, hourlyRev, kmRev, totBookingTime, totBookingDistance
+
+FPSim = [StationsBookingCounts2(:,2) totRevenue2 bookingDistanceXVehicle2 bookingTimeXVehicle2...
+    hourlyRevenue2 kilometricRevenue2*1000 totBookingTime2 totBookingDistance2];
+ABDPSim = [StationsBookingCounts3(:,2) totRevenue3 bookingDistanceXVehicle3...
+    bookingTimeXVehicle3 hourlyRevenue3 kilometricRevenue3*1000 totBookingTime3 totBookingDistance3];
+TBDPSim = [StationsBookingCounts4(:,2) totRevenue4 bookingDistanceXVehicle4...
+    bookingTimeXVehicle4 hourlyRevenue4 kilometricRevenue4*1000 totBookingTime4 totBookingDistance4];
+
+BookAxis = max([StationsBookingCounts2(:,2),StationsBookingCounts3(:,2),StationsBookingCounts4(:,2)]);
+RevenueAxis = max([totRevenue2,totRevenue3,totRevenue4]);
+DistXVehAxis = max([bookingDistanceXVehicle2,bookingDistanceXVehicle3,bookingDistanceXVehicle4]);
+TimeXVehAxis = max([bookingTimeXVehicle2,bookingTimeXVehicle3,bookingTimeXVehicle4]);
+HourlyAxis = max([hourlyRevenue2,hourlyRevenue3,hourlyRevenue4]);
+KilometricAxis = max([kilometricRevenue2*1000 ,kilometricRevenue3*1000 ,kilometricRevenue4*1000 ]);
+TotBookTimeAxis = max([totBookingTime2,totBookingTime3,totBookingTime4]);
+TotBookDistanceAxis = max([totBookingDistance2,totBookingDistance3,totBookingDistance4]);
+
+BookAxis = (ceil((BookAxis + (BookAxis/20))/10))*10;
+RevenueAxis = (ceil((RevenueAxis + (RevenueAxis/10))/10))*10;
+DistXVehAxis = (ceil((DistXVehAxis + (DistXVehAxis/20))/10))*10;
+TimeXVehAxis = (ceil((TimeXVehAxis + (TimeXVehAxis/10))/10))*10;
+HourlyAxis = (ceil((HourlyAxis + (HourlyAxis/10))/10))*10;
+KilometricAxis = round(KilometricAxis + (KilometricAxis/10),1);
+TotBookTimeAxis = (ceil((TotBookTimeAxis + (TotBookTimeAxis/15))/10))*10;
+TotBookDistanceAxis = (ceil((TotBookDistanceAxis + (TotBookDistanceAxis/20))/10))*10;
+
+%min axis
+div = 1.7;
+P = [FPSim;ABDPSim;TBDPSim];
+
+spider_plot(P,...
+    'AxesLabels', {'#Bookings', 'totRevenue[€]', 'Trip Length per Vehicle[Km]',...
+    'Booking Time per Vehicle [h]', 'Hourly Revenue[€/h]', 'Kilometric Revenue [€/m]',...
+    'Total Booking Time [h]', 'Total Booking Distance [Km]'},...
+    'AxesPrecision', 1,...
+    'Color', [1, 0, 0; 0, 0, 1;1, 0, 1],...
+    'LineStyle', {':',':',':'},...
+    'LineWidth', 1,...
+    'Marker', {'o', 'o', 'o'},...
+    'FillOption', 'on',...
+    'FillTransparency', 0.02,...
+    'AxesLabelsOffset', 0.2);
+legend('Fixed Pricing', 'Availability-Based Dynamic Pricing', 'Time-Based Dynamic Pricing',...
+    'Location', 'southoutside');
+hold off
+filename = sprintf('SpiderwebKPIs.png');
+saveas(gca,filename);

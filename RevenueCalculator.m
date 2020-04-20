@@ -17,4 +17,4 @@ hourlyRevenue = revenueXVehicle/bookingTimeXVehicle;
 kilometricRevenue = revenueXVehicle/bookingDistanceXVehicle;
 
 filename = sprintf('Revenue_%i.mat',y);
-save(filename,'totRevenue','totBookingTime','totBookingDistance','revenueXVehicle','bookingTimeXVehicle','bookingDistanceXVehicle','hourlyRevenue','kilometricRevenue');
+save(filename,'revenueList','totRevenue','totBookingTime','totBookingDistance','revenueXVehicle','bookingTimeXVehicle','bookingDistanceXVehicle','hourlyRevenue','kilometricRevenue');
